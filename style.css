@@ -8,7 +8,7 @@
 body {
   background: #56baed;
 }
-.select-box, .play-board {
+.select-box, .play-board, .result-box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -24,7 +24,7 @@ body {
   border-radius: 5px;
   max-width: 330px;
   width: 100%;
-  display: none;
+  /* display: none; */
 }
 .select-box header {
   font-size: 23px;
@@ -54,7 +54,8 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.options button:hover {
+.options button:hover,
+.result-box .btn button:hover {
   transform: scale(0.96);
 }
 .options button.playerX {
@@ -64,6 +65,9 @@ body {
   margin-left: 5px;
 }
 
+.play-board {
+  display: none;
+}
 .play-board .details {
   background: #fff;
   padding: 7px;
@@ -72,6 +76,7 @@ body {
 .play-board .details .players {
   display: flex;
   width: 100%;
+  position: relative;
   justify-content: space-between;
 }
 .play-board .details span {
@@ -84,10 +89,21 @@ body {
   cursor: default;
   width: 100%;
   text-align: center;
+  position: relative;
+  z-index: 5;
 }
-.details span.active {
+.details span:first-child {
   color: #fff;
+}
+.details .slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
   background: #56baed;
+  border-radius: 5px;
+  z-index: 2;
 }
 .play-board .play-area {
   margin-top: 20px;
@@ -102,4 +118,44 @@ body {
   width: 80px;
   background: #fff;
   border-radius: 5px;
+  font-size: 40px;
+  text-align: center;
+  line-height: 80px;
+  color: #56baed;
+}
+
+.result-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 350px;
+  width: 100%;
+  display: none;
+}
+.result-box .won-text {
+  font-size: 25px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+}
+.result-box .won-text p {
+  font-weight: 600;
+  margin: 0 5px;
+}
+.result-box .btn {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+.result-box .btn button {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border: none;
+  outline: none;
+  background: #56baed;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
