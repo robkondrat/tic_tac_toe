@@ -4,7 +4,10 @@ selectXBtn = selectBox.querySelector(".playerX"),
 selectOBtn = selectBox.querySelector(".playerO"),
 playBoard = document.querySelector(".play-board"),
 allBox = document.querySelectorAll("section span"),
-players = document.querySelector(".players");
+players = document.querySelector(".players"),
+resultBox = document.querySelector(".result-box"),
+wonText = resultBox.querySelector(".won-text"),
+replayBtn = resultBox.querySelector("button");
 
 window.onload = () => { // once window is loaded
   for (let i = 0; i < allBox.length; i++) { // add onclick attribute in all available section's spans
@@ -93,7 +96,12 @@ function selectWinner() { // if one combination of these return true then select
     // when the match is won stop the bot
     runBot = false;
     bot(runBot);
+    setTimeout(() => { // delay to show result box
+      playBoard.classList.remove("show");
+      resultBox.classList.add("show");
+    }, 700);
 
     // show the result box with the the winner
+    wonText.innerHTML = `Player <p>${playerSign}</p> wins!`
   }
 }
