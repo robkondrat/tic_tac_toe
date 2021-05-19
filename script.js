@@ -23,15 +23,49 @@ window.onload = () => { // once window is loaded
 
 let playerXIcon = "fas fa-times"; // class names of fontawesome icons
 let playerOIcon = "far fa-circle";
+let playerSign = "X";
 
 // user click function 
 function clickedBox(element) {
   if (players.classList.contains("player")) {
+    playerSign = "O";
     element.innerHTML = `<i class="${playerOIcon}"></i>`;
     players.classList.add("active");
+    element.setAttribute("id", playerSign);
   } else {
     element.innerHTML = `<i class="${playerXIcon}"></i>`;
     players.classList.add("active");
+    element.setAttribute("id", playerSign);
   }
   element.style.pointerEvents = "none"; // once user selects any box then that box can't be selected again
+  let randomDelayTime = ((Math.random() * 1000) + 300).toFixed(); // generating random time delay so bot will delay randomly to select box
+  setTimeout(() => {
+    bot(); // calling bot function
+  }, randomDelayTime); // passing random delay time
+}
+
+function bot() {
+  playerSign = "O";
+  let array = []; // creating empty array where we'll store unselected boxes
+  for (let i = 0; i < allBox.length; i++) {
+    if (allBox[i].childElementCount == 0) { 
+      array.push(i);
+    }
+  }
+  let randomBox = array[Math.floor(Math.random() * array.length)]; // getting random index from array so bot will select random unselected box
+  if (array.length > 0) {
+    if (players.classList.contains("player")) {
+      playerSign = "X";
+      allBox[randomBox].innerHTML = `<i class="${playerXIcon}"></i>`;
+      players.classList.remove("active");
+      allBox[randomBox].setAttribute("id", playerSign);
+    } else {
+      allBox[randomBox].innerHTML = `<i class="${playerOIcon}"></i>`;
+      players.classList.remove("active");
+      allBox[randomBox].setAttribute("id", playerSign);
+    }
+  }
+  allBox[randomBox].style.pointerEvents = "none"; // user can't select bot selected boxes
+  playerSign = "X";
+  // console.log(array);
 }
